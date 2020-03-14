@@ -8,11 +8,21 @@
 
 import UIKit
 
+struct Flashcard {
+    var question: String
+    var answer: String
+    
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var backLabel: UILabel!
     
     @IBOutlet weak var frontLabel: UILabel!
+    
+    //array to hold our flashcards
+    var flashcards = [Flashcard]()
+    var currentIndex = 0
     
     var flashcardsController: ViewController!
 
@@ -27,6 +37,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     
     @IBOutlet weak var button3: UIButton!
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBOutlet weak var prevButton: UIButton!
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,7 +78,18 @@ class ViewController: UIViewController {
         
         card.layer.shadowRadius = 15.0
         card.layer.shadowOpacity = 1
+        
+        readSavedFlashcards()
+        
+        if flashcards.count == 0{
+            updateFlashcard(question: "10/2", answer: "5")
 
+        }
+        else{
+            updateLabels()
+            updateNextPrevButtons()
+        }
+        
         
     }
 
@@ -84,12 +109,79 @@ class ViewController: UIViewController {
     }
 
     func updateFlashcard(question: String, answer: String) {
-        frontLabel.text = question
-        backLabel.text = answer
-
-
-
+        let flashcard = Flashcard(question: question, answer: answer)
+        
+        //adding flashcard in the flashcards array
+        flashcards.append(flashcard)
+            print("ADDED NEW FLASHCARD")
+        currentIndex = flashcards.count - 1
+            print("our current index is \(currentIndex)")
+        
+        frontLabel.text = flashcard.question
+        backLabel.text = flashcard.answer
+        
+        
+        
+        //update buttons
+        updateNextPrevButtons()
+        //update labels
+        updateLabels()
+        
+        //saves all flashcards to disk
+        saveAllFlashCardsToDisk()
+        
+        
     }
+    func updateLabels() {
+        let currentFlashcard = flashcards[currentIndex]
+        
+        //update labels
+        frontLabel.text = currentFlashcard.question
+        backLabel.text = currentFlashcard.answer
+    }
+    func updateNextPrevButtons() {
+        //disable next button if at the end
+        if currentIndex == flashcards.count - 1
+        {
+            nextButton.isEnabled = false
+        }
+        else
+        {
+            nextButton.isEnabled = true
+        }
+        
+        if currentIndex == 0 {
+            prevButton.isEnabled = false
+        }
+        else{
+            prevButton.isEnabled = true
+        }
+    }
+    func saveAllFlashCardsToDisk() {
+        
+        let dictionaryArray = flashcards.map { (card) -> [String: String] in
+            return ["question": card.question, "answer": card.answer]
+        }
+        
+        UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
+        
+        print("FLASHCARDS SAVED TO USERDEFAULTS")
+        
+    }
+    
+    func readSavedFlashcards(){
+        
+        if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String:String]]{
+            let savedCards = dictionaryArray.map
+            {
+                dictionary -> Flashcard in
+                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
+            }
+            flashcards.append(contentsOf:savedCards)
+        }
+      
+        }
+    
     
     @IBAction func didTapButton1(_ sender: Any) {
         FALSE.isHidden = false
@@ -116,7 +208,34 @@ class ViewController: UIViewController {
 
 
     }
-
+    
+    @IBAction func didTapOnNext(_ sender: Any) {
+        
+        //increase current index
+        currentIndex = currentIndex  + 1
+        
+        //update labels
+        updateLabels()
+        
+        //update buttons
+        updateNextPrevButtons()
+    }
+    
+    @IBAction func didTapOnPrev(_ sender: Any) {
+        //increase current index
+        currentIndex = currentIndex  - 1
+        
+        //update labels
+        updateLabels()
+        
+        //update buttons
+        updateNextPrevButtons()
+        
+        
+    }
+    
+    
+    
 }
     
 

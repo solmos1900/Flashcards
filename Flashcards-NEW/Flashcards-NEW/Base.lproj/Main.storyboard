@@ -83,6 +83,22 @@
                                     <segue destination="ksz-F8-jb0" kind="presentation" id="ktr-DL-u73"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRx-yN-xSu">
+                                <rect key="frame" x="333" y="810" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="didTapOnNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DmQ-Ty-rcA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qa-u1-sek">
+                                <rect key="frame" x="37" y="810" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Prev"/>
+                                <connections>
+                                    <action selector="didTapOnPrev:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PG5-Xb-voh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -96,6 +112,8 @@
                         <outlet property="button3" destination="MLL-2p-9GG" id="d4n-BC-QB0"/>
                         <outlet property="card" destination="Wak-cS-mkx" id="ckG-nw-Y0s"/>
                         <outlet property="frontLabel" destination="YCf-Oc-3UH" id="FDK-GL-GnJ"/>
+                        <outlet property="nextButton" destination="pRx-yN-xSu" id="6WH-X6-V46"/>
+                        <outlet property="prevButton" destination="5Qa-u1-sek" id="90K-cf-Vhq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
