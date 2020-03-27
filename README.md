@@ -17,4 +17,4 @@ The lab helped with making the application look professional and stylistic with 
 ## Optional
 - [ ] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
 - [ ] User should see all views properly layout when using the app on a phone of different sizes
-- [ ] Correct ans
+- [ ] Correct answer in multiple choice should be random
