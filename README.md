@@ -1,8 +1,7 @@
 ## Lab 4
 
 ### App Description
-`TODO://` Add app description
-
+The lab helped with making the application look professional and stylistic with the added images as well as the transitions/animations.
 ### App Walk-though
 
 <img src="https://media.giphy.com/media/VbELvCTw83TmfK38PY/giphy.gif" width=200><br>
