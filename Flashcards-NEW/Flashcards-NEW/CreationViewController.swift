@@ -14,12 +14,22 @@ class CreationViewController: UIViewController {
     
     @IBOutlet weak var answerTextField: UITextField!
     
+    @IBOutlet weak var answerTextField2: UITextField!
+    
+    @IBOutlet weak var answerTextField3: UITextField!
+        
+    
+    var initialQuestion: String?
+    var initialAnswer: String?
+  
     var flashcardsController: ViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        questionTextField.text = initialQuestion
+        answerTextField.text = initialAnswer
+        
     }
     
     @IBAction func didTapOnCancel(_ sender: Any) {
@@ -32,8 +42,39 @@ class CreationViewController: UIViewController {
         
         let answerText = answerTextField.text
         
-        flashcardsController.updateFlashcard(question: questionText!, answer: answerText!)
-        dismiss(animated: true)
+        let answerTextTwo = answerTextField2.text
+        
+        let answerTextThree = answerTextField3.text
+        
+        //check if text boxes are empty
+        if questionText == nil || answerText == nil || questionText!.isEmpty || answerText!.isEmpty
+        {
+            //creation of alert
+            let alert = UIAlertController(title: "Missing Text", message: "You need to enter both a question and an answer", preferredStyle: .alert)
+            present(alert, animated: true)
+            //to dismiss alert
+            let okAction = UIAlertAction(title: "Ok", style: .default)
+            alert.addAction(okAction)
+            
+        }
+        else
+        {
+            var isExisting = false
+              if initialQuestion != nil
+              {
+              isExisting = true
+              }
+              
+            //updates flashcards normally
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, isExisting: isExisting,  extraAnswerOne: answerTextTwo!, extraAnswerTwo: answerTextThree!)
+            
+            
+                   dismiss(animated: true)
+        }
+        
+        
+        
+       
     }
     
     
